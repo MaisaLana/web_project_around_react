@@ -1,16 +1,12 @@
-import avatar from './images/avatar.png';
-import edit from './images/editbutton.png';
-import add from './images/addbutton.png';
+import avatar from '../../images/avatar.png';
+import edit from '../../images/editbutton.png';
+import add from '../../images/addbutton.png';
+import Vector from '../../images/Vector.png';
 
-function App() {
+export default function Main() {
     return (
-    <div className="page">      
-      <header className="header">
-        <span className="header__title">Around</span>
-        <span className="header__subtitle">The U.S.</span>
-      </header>
-
-      <section className="profile">
+        <>
+    <section className="profile">
         <div className="profile__content">
           <div className="profile__images">
           <img
@@ -21,7 +17,7 @@ function App() {
            <div className="profile__image-overlay"></div>
             <img
             className="profile__image-edit"
-            src="images/Vector.png"
+            src={Vector}
             alt="Foto do perfil"
           /></div>
           <div className="profile__information">
@@ -47,11 +43,6 @@ function App() {
 
       <div className="gallery">
       </div>
-      <footer className="footer">&copy; 2026 Around The U.S.</footer>
-    
-    </div>
-  )
+      </>
+      )
 }
-
-
-export default App
