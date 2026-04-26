@@ -1,0 +1,42 @@
+.header {
+  font-size: 74px;
+  padding-top: 45px;
+  margin: 0 auto;
+  border-bottom: solid 1px #545454;
+  font-family: "inter", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  max-width: 880px;
+  width: 100%;
+}
+
+.header__subtitle {
+  font-size: 30px;
+  padding-bottom: 50px;
+}
+
+@media screen and (max-width: 893px){
+  .header{
+    margin: 0 auto;
+    max-width: 600px;
+  }
+}
+
+@media screen and (max-width: 770px){
+   .header{
+    margin: 0 auto;
+    padding: 28px 0 32px;
+    font-size: 24px;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .header__title{
+    padding-left: 27px;
+  }
+
+  .header__subtitle {
+  font-size: 10px;
+  position: relative;
+  top:-10px;
+} 
+}
