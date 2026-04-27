@@ -8,10 +8,10 @@ import {useState} from 'react';
 import Card from './components/card/Card';
 
 import Popup from './components/popup/Popup';
-import NewCard from './components/popup/components/newCard/NewCard';
-import EditProfile from './components/popup/components/editProfile/EditProfile';
-import EditAvatar from './components/popup/components/editAvatar/EditAvatar';
-import ImgPopup from './components/popup/components/imagePopup/ImagePopup';
+import NewCard from './components/newCard/NewCard';
+import EditProfile from './components/editProfile/EditProfile';
+import EditAvatar from './components/editAvatar/EditAvatar';
+import ImgPopup from './components/imagePopup/ImagePopup';
 
 
 
