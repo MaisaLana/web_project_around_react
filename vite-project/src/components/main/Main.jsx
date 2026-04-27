@@ -40,9 +40,9 @@ console.log(cards);
 export default function Main() {
   const [popup, setPopup] = useState(null);
 
-  const newCardPopup = { title: "New card", children: <NewCard /> };
-  const editProfile = { title: "Edit profile", children: <EditProfile /> };
-  const editAvatar = { title: "Edit avatar", children: <EditAvatar /> };
+  const newCardPopup = { title: "Novo local", children: <NewCard /> };
+  const editProfile = { title: "Editar perfil", children: <EditProfile /> };
+  const editAvatar = { title: "Alterar a foto de perfil", children: <EditAvatar /> };
   
   
   function handleOpenPopup(popup) {
