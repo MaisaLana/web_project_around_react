@@ -34,9 +34,6 @@ const cards = [
   },
 ];
 
-console.log(cards);
-
-
 export default function Main() {
   const [popup, setPopup] = useState(null);
 
@@ -45,8 +42,8 @@ export default function Main() {
     const editAvatar = { title: "Alterar a foto do perfil", children: <EditAvatar /> };
   
   
-  function handleOpenPopup(popup) {
-    setPopup(popup);
+  function handleOpenPopup(popupSelected) {
+    setPopup(popupSelected);
   }
  
   function handleClosePopup() {
