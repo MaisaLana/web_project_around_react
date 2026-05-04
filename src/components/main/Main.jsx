@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import avatar from "../../images/avatar.png";
 import edit from "../../images/editbutton.png";
@@ -14,9 +14,11 @@ import EditAvatar from "./components/editAvatar/EditAvatar";
 import ImgPopup from "./components/imagePopup/ImagePopup";
 
 import API from "../../utils/Api";
-
+import CurrentUserContext from "../../contexts/CurrentUserContext"
 
 export default function Main() {
+  const currentUser = useContext(CurrentUserContext);
+
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState([]);
 
@@ -58,7 +60,7 @@ export default function Main() {
       <section className="profile">
         <div className="profile__content">
           <div className="profile__images">
-            <img className="profile__image" src={avatar} alt="Foto do perfil" />
+            <img className="profile__image" src={currentUser.avatar} alt="Foto do perfil" />
             <div
               className="profile__image-overlay"
               onClick={() => handleOpenPopup(editAvatar)}
@@ -73,8 +75,8 @@ export default function Main() {
 
           <div className="profile__information">
             <div className="profile__bio">
-              <h1 className="profile__name">Jacques Cousteau</h1>
-              <span className="profile__profession">Explorador</span>
+              <h1 className="profile__name">{currentUser.name}</h1>
+              <span className="profile__profession">{currentUser.about}</span>
             </div>
             <button
               type="button"
