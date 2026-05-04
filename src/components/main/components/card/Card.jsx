@@ -8,9 +8,13 @@ export default function Card(props) {
     props.onCardLike(props.card);
   }
 
+  function handleDeleteClick() {
+    props.onCardDelete(props.card);
+  }
+
   return (
     <div className="gallery__item">
-      <span className="delete material-symbols-rounded"> delete </span>
+      <span className="delete material-symbols-rounded" onClick={handleDeleteClick}> delete </span>
       <img
         className="gallery__image"
         src={link}
