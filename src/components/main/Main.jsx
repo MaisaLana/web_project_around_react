@@ -1,9 +1,9 @@
+import { useState, useEffect } from "react";
+
 import avatar from "../../images/avatar.png";
 import edit from "../../images/editbutton.png";
 import add from "../../images/addbutton.png";
 import Vector from "../../images/Vector.png";
-
-import { useState } from "react";
 
 import Card from "./components/card/Card";
 
@@ -13,27 +13,23 @@ import EditProfile from "./components/editProfile/EditProfile";
 import EditAvatar from "./components/editAvatar/EditAvatar";
 import ImgPopup from "./components/imagePopup/ImagePopup";
 
-const cards = [
-  {
-    isLiked: false,
-    _id: "5d1f0611d321eb4bdcd707dd",
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:10:57.741Z",
-  },
-  {
-    isLiked: false,
-    _id: "5d1f064ed321eb4bdcd707de",
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:11:58.324Z",
-  },
-];
+import API from "../../utils/Api";
+
 
 export default function Main() {
   const [popup, setPopup] = useState(null);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+  API
+    .getInitialCards()
+    .then((data) => {
+      setCards(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}, []);
 
   const newCardPopup = { title: "Novo local", children: <NewCard /> };
   const editProfile = { title: "Editar perfil", children: <EditProfile /> };
