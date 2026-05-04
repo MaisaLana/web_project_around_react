@@ -11,17 +11,24 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
-    API.getUserInfo()
+    (async () => {
+      await API.getUserInfo()
       .then((data) => {
         setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.error(err);
       });
+    })();
   }, []);
 
+  const handleUpdateUser = (data) =>{
+    (async () =>{
+      await API.editProfile(data).then((newData) => {
+        setCurrentUser(newData);
+      });
+    })();
+  };
+
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{currentUser, handleUpdateUser }}>
       <div className="page">
         <Header />
         <Main />

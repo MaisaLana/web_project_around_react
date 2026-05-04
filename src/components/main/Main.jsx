@@ -17,7 +17,7 @@ import API from "../../utils/Api";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function Main() {
-  const currentUser = useContext(CurrentUserContext);
+  const {currentUser} = useContext(CurrentUserContext);
 
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState([]);
@@ -86,7 +86,7 @@ export default function Main() {
           <div className="profile__images">
             <img
               className="profile__image"
-              src={currentUser.avatar}
+              src={currentUser?.avatar}
               alt="Foto do perfil"
             />
             <div
@@ -103,8 +103,8 @@ export default function Main() {
 
           <div className="profile__information">
             <div className="profile__bio">
-              <h1 className="profile__name">{currentUser.name}</h1>
-              <span className="profile__profession">{currentUser.about}</span>
+              <h1 className="profile__name">{currentUser?.name}</h1>
+              <span className="profile__profession">{currentUser?.about}</span>
             </div>
             <button
               type="button"
