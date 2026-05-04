@@ -3,6 +3,11 @@ export default function Card(props) {
   const cardLikeButtonClassName = `gallery__image-like material-symbols-outlined  ${
     isLiked ? "material-symbols-rounded" : ""
   }`;
+
+  function handleLikeClick(){
+    props.onCardLike(props.card);
+  }
+
   return (
     <div className="gallery__item">
       <span className="delete material-symbols-rounded"> delete </span>
@@ -14,7 +19,7 @@ export default function Card(props) {
       />
       <div className="gallery__image-item">
         <span className="gallery__image-name">{name}</span>
-        <span className={cardLikeButtonClassName}>favorite</span>
+        <span className={cardLikeButtonClassName} onClick={handleLikeClick}>favorite</span>
       </div>
     </div>
   );

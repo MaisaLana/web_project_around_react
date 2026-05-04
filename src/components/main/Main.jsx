@@ -55,6 +55,14 @@ export default function Main() {
     });
   }
 
+  async function handleCardLike(card) {
+    const isLiked = card.isLiked;
+  
+    await API.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+        setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
+    }).catch((error) => console.error(error));
+}
+
   return (
     <>
       <section className="profile">
@@ -97,7 +105,7 @@ export default function Main() {
 
       <div className="gallery">
         {cards.map((card) => (
-          <Card key={card._id} card={card} onCardClick={handleCardClick} />
+          <Card key={card._id} card={card} onCardClick={handleCardClick} onCardLike={handleCardLike}/>
         ))}
       </div>
 
