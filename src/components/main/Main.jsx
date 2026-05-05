@@ -16,10 +16,9 @@ import ImgPopup from "./components/imagePopup/ImagePopup";
 import API from "../../utils/Api";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-export default function Main() {
+export default function Main(props) {
   const {currentUser} = useContext(CurrentUserContext);
 
-  const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -39,16 +38,10 @@ export default function Main() {
     children: <EditAvatar />,
   };
 
-  function handleOpenPopup(popupSelected) {
-    setPopup(popupSelected);
-  }
-
-  function handleClosePopup() {
-    setPopup(null);
-  }
+  
 
   function handleCardClick(card) {
-    setPopup({
+    props.onOpenPopup({
       title: null,
       children: <ImgPopup card={card} />,
     });
@@ -91,13 +84,13 @@ export default function Main() {
             />
             <div
               className="profile__image-overlay"
-              onClick={() => handleOpenPopup(editAvatar)}
+              onClick={() => props.onOpenPopup(editAvatar)}
             ></div>
             <img
               className="profile__image-edit"
               src={Vector}
               alt="Foto do perfil"
-              onClick={() => handleOpenPopup(editAvatar)}
+              onClick={() => props.onOpenPopup(editAvatar)}
             />
           </div>
 
@@ -109,7 +102,7 @@ export default function Main() {
             <button
               type="button"
               className="profile__edit-button"
-              onClick={() => handleOpenPopup(editProfile)}
+              onClick={() => props.onOpenPopup(editProfile)}
             >
               <img className="profile__edit-icon" src={edit} alt="Editar" />
             </button>
@@ -119,7 +112,7 @@ export default function Main() {
           className="profile__add-button"
           src={add}
           alt="Adicionar"
-          onClick={() => handleOpenPopup(newCardPopup)}
+          onClick={() => props.onOpenPopup(newCardPopup)}
         />
       </section>
 
@@ -135,9 +128,9 @@ export default function Main() {
         ))}
       </div>
 
-      {popup && (
-        <Popup onClose={handleClosePopup} title={popup.title}>
-          {popup.children}
+      {props.popup && (
+        <Popup onClose={props.onClosePopup} title={props.popup.title}>
+          {props.popup.children}
         </Popup>
       )}
     </>
