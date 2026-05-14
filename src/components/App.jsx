@@ -12,17 +12,17 @@ function App() {
   const [popup, setPopup] = useState(null);
 
   const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    API.getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-
+  
+    useEffect(() => {
+      API.getInitialCards()
+        .then((data) => {
+          setCards(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }, []);
+  
   useEffect(() => {
     (async () => {
       await API.getUserInfo().then((data) => {
@@ -30,6 +30,15 @@ function App() {
       });
     })();
   }, []);
+
+  const handleAddPlaceSubmit = (data) =>{
+    (async () => {
+      await API.addCard(data).then((newCard) =>{
+        setCards([newCard, ...cards]);
+        handleClosePopup();
+      });
+    })();
+  }
 
   const handleUpdateUser = (data) => {
     (async () => {
@@ -40,45 +49,39 @@ function App() {
     })();
   };
 
-  const handleUpdateAvatar = (data) => {
-    (async () => {
-      await API.editImageProfile(data).then((newData) => {
-        setCurrentUser(newData);
+  const handleUpdateAvatar = (data) =>{
+    (async () =>{
+      await API.editImageProfile(data).then((newData) =>{
+        setCurrentUser (newData);
         handleClosePopup();
       });
     })();
-  };
-
-  async function handleCardLike(card) {
-    const isLiked = card.isLiked;
-
-    await API.changeLikeCardStatus(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard,
-          ),
-        );
-      })
-      .catch((error) => console.error(error));
   }
-
-  async function handleCardDelete(card) {
-    await API.deleteCard(card._id)
+  
+    async function handleCardLike(card) {
+      const isLiked = card.isLiked;
+  
+      await API.changeLikeCardStatus(card._id, !isLiked)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((currentCard) =>
+              currentCard._id === card._id ? newCard : currentCard,
+            ),
+          );
+        })
+        .catch((error) => console.error(error));
+    }
+  
+    async function handleCardDelete(card) {
+      await API.deleteCard(card._id)
       .then(() => {
-        setCards((state) =>
-          state.filter((currentCard) => currentCard._id !== card._id),
-        );
+        setCards((state) => state.filter((currentCard) =>
+        currentCard._id !== card._id
+      )
+    );
       })
       .catch((error) => console.error(error));
-  }
-
-  function handleCardClick(card) {
-    props.onOpenPopup({
-      title: null,
-      children: <ImgPopup card={card} />,
-    });
-  }
+    }
 
   function handleOpenPopup(popupSelected) {
     setPopup(popupSelected);
@@ -88,7 +91,7 @@ function App() {
     setPopup(null);
   }
   return (
-    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
+    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser, handleAddPlaceSubmit }}>
       <div className="page">
         <Header />
         <Main
@@ -99,7 +102,7 @@ function App() {
           cards={cards}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
-          onCardClick={handleCardClick}
+          onAddPlaceSubmit={handleAddPlaceSubmit}
         />
         <Footer />
       </div>

@@ -19,7 +19,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 export default function Main(props) {
   const { currentUser } = useContext(CurrentUserContext);
 
-  const newCardPopup = { title: "Novo local", children: <NewCard /> };
+  const newCardPopup = { title: "Novo local", children: <NewCard onAddPlaceSubmit={props.onAddPlaceSubmit}/> };
   const editProfile = { title: "Editar perfil", children: <EditProfile /> };
   const editAvatar = {
     title: "Alterar a foto do perfil",
