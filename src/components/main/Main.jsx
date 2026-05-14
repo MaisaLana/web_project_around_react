@@ -17,59 +17,20 @@ import API from "../../utils/Api";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function Main(props) {
-  const {currentUser} = useContext(CurrentUserContext);
-
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    API.getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const newCardPopup = { title: "Novo local", children: <NewCard /> };
   const editProfile = { title: "Editar perfil", children: <EditProfile /> };
   const editAvatar = {
     title: "Alterar a foto do perfil",
-    children: <EditAvatar onUpdateAvatar={props.onUpdateAvatar}/>,
+    children: <EditAvatar onUpdateAvatar={props.onUpdateAvatar} />,
   };
-
-  
 
   function handleCardClick(card) {
     props.onOpenPopup({
       title: null,
       children: <ImgPopup card={card} />,
     });
-  }
-
-  async function handleCardLike(card) {
-    const isLiked = card.isLiked;
-
-    await API.changeLikeCardStatus(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard,
-          ),
-        );
-      })
-      .catch((error) => console.error(error));
-  }
-
-  async function handleCardDelete(card) {
-    await API.deleteCard(card._id)
-    .then(() => {
-      setCards((state) => state.filter((currentCard) =>
-      currentCard._id !== card._id
-    )
-  );
-    })
-    .catch((error) => console.error(error));
   }
 
   return (
@@ -117,13 +78,13 @@ export default function Main(props) {
       </section>
 
       <div className="gallery">
-        {cards.map((card) => (
+        {props.cards.map((card) => (
           <Card
             key={card._id}
             card={card}
             onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            onCardLike={props.onCardLike}
+            onCardDelete={props.onCardDelete}
           />
         ))}
       </div>
