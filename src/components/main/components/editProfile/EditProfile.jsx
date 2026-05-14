@@ -20,6 +20,7 @@ export default function EditProfile() {
     event.preventDefault(); // Impede o comportamento padrão de envio do formulário
 
     handleUpdateUser({ name, about: description }); // Atualiza as informações do usuário
+
   };
 
   return (

@@ -28,6 +28,15 @@ function App() {
     })();
   };
 
+  const handleUpdateAvatar = (data) =>{
+    (async () =>{
+      await API.editImageProfile(data).then((newData) =>{
+        setCurrentUser (newData);
+        handleClosePopup();
+      });
+    })();
+  }
+
   function handleOpenPopup(popupSelected) {
     setPopup(popupSelected);
   }
@@ -43,6 +52,7 @@ function App() {
           popup={popup}
           onOpenPopup={handleOpenPopup}
           onClosePopup={handleClosePopup}
+          onUpdateAvatar={handleUpdateAvatar}
         />
         <Footer />
       </div>

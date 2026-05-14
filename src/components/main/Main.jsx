@@ -35,7 +35,7 @@ export default function Main(props) {
   const editProfile = { title: "Editar perfil", children: <EditProfile /> };
   const editAvatar = {
     title: "Alterar a foto do perfil",
-    children: <EditAvatar />,
+    children: <EditAvatar onUpdateAvatar={props.onUpdateAvatar}/>,
   };
 
   
