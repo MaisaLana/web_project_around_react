@@ -8,10 +8,10 @@ import Vector from "../../images/Vector.png";
 import Card from "./components/card/Card";
 
 import Popup from "./components/popup/Popup";
-import NewCard from "./components/newCard/NewCard";
-import EditProfile from "./components/editProfile/EditProfile";
-import EditAvatar from "./components/editAvatar/EditAvatar";
-import ImgPopup from "./components/imagePopup/ImagePopup";
+import NewCard from "./components/popup/newCard/NewCard";
+import EditProfile from "./components/popup/editProfile/EditProfile";
+import EditAvatar from "./components/popup/editAvatar/EditAvatar";
+import ImgPopup from "./components/popup/imagePopup/ImagePopup";
 
 import API from "../../utils/Api";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
