@@ -1,4 +1,4 @@
-export default function ImgPopup ({card}){
+export default function ImagePopup ({card}){
     return(
         <>
           <img 
